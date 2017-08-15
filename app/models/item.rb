@@ -47,9 +47,9 @@ class Item
                       WHERE id = ?;", id)
   end
 
-  def self.find_by(term)
+  def self.find_by(filter)
     items = database.execute("SELECT * FROM items
-                              WHERE description LIKE ?;", "%#{term}%")
+                              WHERE description LIKE ?;", "%#{filter}%")
     items.map do |item|
       Item.new(item)
     end

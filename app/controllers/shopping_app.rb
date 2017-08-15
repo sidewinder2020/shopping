@@ -10,16 +10,17 @@ class ShoppingApp < Sinatra::Base
   end
 
   get '/items' do
-    @items = Item.find_by(params[:term])
+    @location = params[:location]
+    @items = Item.find_by(params[:filter])
     erb :items_index
   end
 
-  get '/items/new' do 
+  get '/items/new' do
     erb :new_item
   end
 
   post '/items' do
-    item = Item.new(params[:item])
+    item = Item.new(params)
     item.save
     redirect '/items'
   end
